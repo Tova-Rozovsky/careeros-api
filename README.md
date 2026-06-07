@@ -4,9 +4,9 @@
 <p><strong>Spring Boot backend powering the CareerOS platform</strong></p>
 
 <p>
-  <a href="https://github.com/career-os/careeros-api/stargazers"><img src="https://img.shields.io/github/stars/career-os/careeros-api?style=flat-square&color=1A56DB" alt="Stars"></a>
-  <a href="https://github.com/career-os/careeros-api/issues"><img src="https://img.shields.io/github/issues/career-os/careeros-api?style=flat-square&color=1A56DB" alt="Issues"></a>
-  <a href="https://github.com/career-os/careeros-api/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="License"></a>
+  <a href="https://github.com/Careers-Os/careeros-api/stargazers"><img src="https://img.shields.io/github/stars/career-os/careeros-api?style=flat-square&color=1A56DB" alt="Stars"></a>
+  <a href="https://github.com/Careers-Os/careeros-api/issues"><img src="https://img.shields.io/github/issues/career-os/careeros-api?style=flat-square&color=1A56DB" alt="Issues"></a>
+  <a href="https://github.com/Careers-Os/careeros-api/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="License"></a>
   <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat-square" alt="Contributing"></a>
 </p>
 
@@ -55,7 +55,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/career-os/careeros-api.git
+git clone https://github.com/Careers-Os/careeros-api.git
 cd careeros-api
 
 # Copy environment file
