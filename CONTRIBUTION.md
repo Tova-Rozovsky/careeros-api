@@ -31,7 +31,7 @@ npm run dev
 git clone https://github.com/Careers-Os/careeros-api.git
 cd careeros-api
 docker-compose up -d        # starts PostgreSQL, Redis, RabbitMQ
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 
 ### AI Service (careeros-ai)
