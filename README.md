@@ -66,7 +66,7 @@ cp .env.example .env
 docker-compose up -d
 
 # Run the application
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 
 API available at: `http://localhost:8080`  
