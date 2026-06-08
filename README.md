@@ -1,6 +1,7 @@
 <div align="center">
 
 <h1>⚙️ CareerOS — API</h1>
+![CI](https://github.com/Careers-Os/careeros-api/actions/workflows/ci.yml/badge.svg)
 <p><strong>Spring Boot backend powering the CareerOS platform</strong></p>
 
 <p>

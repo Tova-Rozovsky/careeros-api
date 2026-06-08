@@ -1,0 +1,16 @@
+com\careeros\controller\ResumeController.class
+com\careeros\repository\ResumeRepository.class
+com\careeros\CareerosApiApplication.class
+com\careeros\entity\JobApplication$ApplicationStatus.class
+com\careeros\entity\User$ExperienceLevel.class
+com\careeros\entity\User.class
+com\careeros\dto\request\RegisterRequest.class
+com\careeros\entity\JobApplication.class
+com\careeros\dto\response\UserResponse.class
+com\careeros\dto\request\LoginRequest.class
+com\careeros\repository\UserRepository.class
+com\careeros\controller\AuthController.class
+com\careeros\exception\GlobalExceptionHandler.class
+com\careeros\dto\response\AuthResponse.class
+com\careeros\entity\Resume.class
+com\careeros\repository\JobApplicationRepository.class
