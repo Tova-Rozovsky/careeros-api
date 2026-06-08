@@ -54,10 +54,10 @@ jobs:
           DB_PASSWORD: careeros
           REDIS_HOST: localhost
           JWT_SECRET: test-secret-key-for-ci-minimum-256-bits-long
-        run: ./mvnw test --no-transfer-progress
+        run: mvn test --no-transfer-progress
 
       - name: Build JAR
-        run: ./mvnw package -DskipTests --no-transfer-progress
+        run: mvn package -DskipTests --no-transfer-progress
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -81,5 +81,5 @@ jobs:
           cache: maven
 
       - name: Check code style
-        run: ./mvnw checkstyle:check --no-transfer-progress
+        run: mvn checkstyle:check --no-transfer-progress
         continue-on-error: true
