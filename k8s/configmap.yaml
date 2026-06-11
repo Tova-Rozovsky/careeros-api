@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: careeros-api-config
+  namespace: careeros-api
+data:
+  SPRING_PROFILES_ACTIVE: prod
+  DB_HOST: postgres-service
+  DB_PORT: "5432"
+  DB_NAME: careeros
+  REDIS_HOST: redis-service
+  REDIS_PORT: "6379"
+  RABBITMQ_HOST: rabbitmq-service
+  RABBITMQ_PORT: "5672"
+  MINIO_ENDPOINT: "http://minio-service:9000"
