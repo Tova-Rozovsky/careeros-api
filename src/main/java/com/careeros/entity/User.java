@@ -14,7 +14,9 @@ public class User {
     @Column(nullable = false) private String name;
     @Column(nullable = false) private String passwordHash;
     private String targetRole;
-    @Column(columnDefinition = "jsonb") private String targetCompanies;
+    // @Column(columnDefinition = "jsonb") private String targetCompanies;
+    @Column(columnDefinition = "jsonb")
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.JSON) private String targetCompanies;
     @Enumerated(EnumType.STRING) private ExperienceLevel experienceLevel;
     @CreationTimestamp private LocalDateTime createdAt;
     @UpdateTimestamp private LocalDateTime updatedAt;
