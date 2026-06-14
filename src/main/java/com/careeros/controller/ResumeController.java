@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
@@ -19,8 +20,7 @@ import java.util.Map;
 @RequestMapping("/api/resumes")
 @Tag(name = "Resumes")
 @RequiredArgsConstructor
-public class
-ResumeController {
+public class ResumeController {
 
     private final AnalysisService analysisService;
 
@@ -51,7 +51,7 @@ ResumeController {
     public ResponseEntity<Map<String, String>> analyze(
             @PathVariable String id,
             @RequestParam(required = false) String jdText,
-            @RequestHeader("X-User-Id") String userId) {
+            @AuthenticationPrincipal String userId) {
 
         // TODO: Once BE-003 is done, fetch resumeText from database
         // For now, accept resumeText as request param for testing
