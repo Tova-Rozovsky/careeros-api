@@ -2,6 +2,7 @@ package com.careeros.controller;
 
 import com.careeros.dto.response.AnalysisResponse;
 import com.careeros.service.AnalysisService;
+import com.careeros.service.ResumeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.MediaType;
+
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Resume endpoints.
- * BE-003: upload, list, delete (TODO — assigned to Full Stack contributor)
- * BE-004: analyze, getAnalysis (implemented here)
+ * BE-003: upload, list, delete
+ * BE-004: analyze, getAnalysis
  */
 @RestController
 @RequestMapping("/api/resumes")
@@ -22,29 +26,49 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ResumeController {
 
+    private final ResumeService resumeService;
     private final AnalysisService analysisService;
 
-    // ── BE-003 (TODO — assigned to Full Stack contributor) ────────────────────
-
-    @PostMapping("/upload")
+    @PostMapping(
+        value = "/upload",
+        consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+)
     @Operation(summary = "Upload resume (PDF/DOCX, max 10MB)")
-    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) {
-        throw new UnsupportedOperationException("BE-003 — not yet implemented");
+    public ResponseEntity<?> upload(
+            @RequestParam("file") MultipartFile file,
+            @AuthenticationPrincipal String userId) {
+
+        return ResponseEntity.ok(
+                resumeService.uploadResume(
+                        file,
+                        userId
+                )
+        );
     }
 
     @GetMapping
     @Operation(summary = "List all resumes for current user")
-    public ResponseEntity<?> list() {
-        throw new UnsupportedOperationException("BE-003 — not yet implemented");
+    public ResponseEntity<?> list(
+            @AuthenticationPrincipal String userId) {
+
+        return ResponseEntity.ok(
+                resumeService.getUserResumes(userId)
+        );
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a resume")
-    public ResponseEntity<?> delete(@PathVariable String id) {
-        throw new UnsupportedOperationException("BE-003 — not yet implemented");
-    }
+    public ResponseEntity<?> delete(
+            @PathVariable String id,
+            @AuthenticationPrincipal String userId) {
 
-    // ── BE-004 (implemented) ──────────────────────────────────────────────────
+        resumeService.deleteResume(
+                UUID.fromString(id),
+                userId
+        );
+
+        return ResponseEntity.noContent().build();
+    }
 
     @PostMapping("/{id}/analyze")
     @Operation(summary = "Trigger ATS analysis (async) — returns jobId for polling")
@@ -53,28 +77,30 @@ public class ResumeController {
             @RequestParam(required = false) String jdText,
             @AuthenticationPrincipal String userId) {
 
-        // TODO: Once BE-003 is done, fetch resumeText from database
-        // For now, accept resumeText as request param for testing
-        // Real flow: resumeId → fetch Resume entity → use parsedText field
-
-        // Temporary: use hardcoded sample text for testing
         String resumeText = "Sample resume text — replace with DB lookup after BE-003";
 
-        String jobId = analysisService.triggerAnalysis(id, userId, resumeText, jdText);
+        String jobId = analysisService.triggerAnalysis(
+                id,
+                userId,
+                resumeText,
+                jdText
+        );
 
         return ResponseEntity.accepted().body(Map.of(
-            "jobId", jobId,
-            "status", "pending",
-            "message", "Analysis started. Poll GET /api/resumes/" + id + "/analysis for results."
+                "jobId", jobId,
+                "status", "pending",
+                "message", "Analysis started. Poll GET /api/resumes/" + id + "/analysis for results."
         ));
     }
 
     @GetMapping("/{id}/analysis")
     @Operation(summary = "Poll ATS analysis result")
-    public ResponseEntity<AnalysisResponse> getAnalysis(@PathVariable String id) {
-        AnalysisResponse response = analysisService.getAnalysisResult(id);
+    public ResponseEntity<AnalysisResponse> getAnalysis(
+            @PathVariable String id) {
 
-        // Return 202 if still pending, 200 if completed or failed
+        AnalysisResponse response =
+                analysisService.getAnalysisResult(id);
+
         if ("pending".equals(response.getStatus())) {
             return ResponseEntity.accepted().body(response);
         }

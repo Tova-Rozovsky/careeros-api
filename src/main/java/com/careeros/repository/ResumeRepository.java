@@ -6,4 +6,5 @@ import java.util.*;
 public interface ResumeRepository extends JpaRepository<Resume, UUID> {
     List<Resume> findByUserOrderByCreatedAtDesc(User user);
     List<Resume> findByUserAndIsActiveTrue(User user);
+    Optional<Resume> findByIdAndUser(UUID id, User user);
 }
