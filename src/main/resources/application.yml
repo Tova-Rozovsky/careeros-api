@@ -47,4 +47,8 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
 
-
+minio:
+  url: ${MINIO_URL:http://localhost:9000}
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin}
+  bucket: careeros-resumes
