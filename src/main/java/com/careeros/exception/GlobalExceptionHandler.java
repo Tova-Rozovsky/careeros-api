@@ -38,6 +38,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntime(RuntimeException ex) {
+        // ex.printStackTrace(); // TEMP — shows real error in console
         return ResponseEntity.internalServerError().body(Map.of(
             "message", "Something went wrong", "status", 500));
     }

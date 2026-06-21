@@ -52,3 +52,21 @@ minio:
   access-key: ${MINIO_ACCESS_KEY:minioadmin}
   secret-key: ${MINIO_SECRET_KEY:minioadmin}
   bucket: careeros-resumes
+
+resend:
+  api-key: ${RESEND_API_KEY:}
+  from: ${RESEND_FROM:onboarding@resend.dev}
+
+app:
+  frontend-url: ${FRONTEND_URL:http://localhost:3000}
+
+oauth:
+  google:
+    client-id: ${GOOGLE_CLIENT_ID:}
+    client-secret: ${GOOGLE_CLIENT_SECRET:}
+  github:
+    client-id: ${GITHUB_CLIENT_ID:}
+    client-secret: ${GITHUB_CLIENT_SECRET:}
+  linkedin:
+    client-id: ${LINKEDIN_CLIENT_ID:}
+    client-secret: ${LINKEDIN_CLIENT_SECRET:}
