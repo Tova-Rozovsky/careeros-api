@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
       - name: resume-service
-        image: careeros/resume-service:latest # Replace with actual registry tag
+        image: careeros-api:v1
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
         envFrom:
@@ -36,11 +37,11 @@ spec:
           httpGet:
             path: /actuator/health/readiness
             port: 8080
-          initialDelaySeconds: 20
+          initialDelaySeconds: 120
           periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
             port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 20
+          initialDelaySeconds: 120
+          failureThreshold: 3

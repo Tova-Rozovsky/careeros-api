@@ -5,11 +5,8 @@ metadata:
   namespace: careeros-api
 data:
   SPRING_PROFILES_ACTIVE: prod
-  DB_HOST: postgres-service
-  DB_PORT: "5432"
-  DB_NAME: careeros
-  REDIS_HOST: redis-service
-  REDIS_PORT: "6379"
-  RABBITMQ_HOST: rabbitmq-service
-  RABBITMQ_PORT: "5672"
-  MINIO_ENDPOINT: "http://minio-service:9000"
+  DB_URL: "jdbc:postgresql://postgres-service:5432/careeros"
+  DB_NAME: "careeros"
+  REDIS_HOST: "redis-service"
+  RABBITMQ_HOST: "rabbitmq-service"
+  MINIO_URL: "http://minio-service:9000"

@@ -4,7 +4,7 @@ metadata:
   name: user-service
   namespace: careeros-api
 spec:
-  replicas: 2 # Production high-availability
+  replicas: 2 
   selector:
     matchLabels:
       app: user-service
@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: careeros/user-service:latest # Replace with actual registry tag
+        image: careeros-api:v1
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
         envFrom:
@@ -32,16 +33,16 @@ spec:
             secretKeyRef:
               name: careeros-api-secrets
               key: DB_PASSWORD
-        # Readiness/Liveness probes recommended for production Spring Boot (Actuator endpoints)
         readinessProbe:
           httpGet:
             path: /actuator/health/readiness
             port: 8080
-          initialDelaySeconds: 20
+          initialDelaySeconds: 120
           periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
             port: 8080
-          initialDelaySeconds: 30
+          initialDelaySeconds: 120
           periodSeconds: 20
+          failureThreshold: 3
