@@ -53,6 +53,7 @@ minio:
   secret-key: ${MINIO_SECRET_KEY:minioadmin}
   bucket: careeros-resumes
 
+
 resend:
   api-key: ${RESEND_API_KEY:}
   from: ${RESEND_FROM:onboarding@resend.dev}
@@ -70,3 +71,19 @@ oauth:
   linkedin:
     client-id: ${LINKEDIN_CLIENT_ID:}
     client-secret: ${LINKEDIN_CLIENT_SECRET:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
